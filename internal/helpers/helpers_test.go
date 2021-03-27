@@ -3,6 +3,8 @@ package helpers
 import (
 	"reflect"
 	"testing"
+
+	"github.com/tamoore/rr-json-parser/internal/roam"
 )
 
 func assertReviews(t testing.TB, got, want roam.RoamNodes) {
