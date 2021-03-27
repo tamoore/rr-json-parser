@@ -27,7 +27,8 @@
 	"extensions": [
 		"golang.Go"
 	],
-
+	"workspaceFolder": "/go/src/github.com/tamoore/${localWorkspaceFolderBasename}",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/go/src/github.com/tamoore/${localWorkspaceFolderBasename},type=bind,consistency=delegated",
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
