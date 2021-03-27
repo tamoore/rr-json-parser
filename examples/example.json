@@ -1,0 +1,378 @@
+[
+    {
+        "create-time": 1616493540844,
+        "title": "Doctrine bundle analysis",
+        ":create/user": {
+            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+        },
+        "children": [
+            {
+                "string": "#work #programming #PHP #Doctrine",
+                "create-time": 1616493544320,
+                ":block/refs": [
+                    {
+                        ":block/uid": "wekOc5a-I"
+                    },
+                    {
+                        ":block/uid": "ta5WPksIf"
+                    },
+                    {
+                        ":block/uid": "i19LJ-tjq"
+                    },
+                    {
+                        ":block/uid": "4Z30DYu21"
+                    }
+                ],
+                "refs": [
+                    {
+                        "uid": "wekOc5a-I"
+                    },
+                    {
+                        "uid": "ta5WPksIf"
+                    },
+                    {
+                        "uid": "i19LJ-tjq"
+                    },
+                    {
+                        "uid": "4Z30DYu21"
+                    }
+                ],
+                ":create/user": {
+                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                },
+                "uid": "si3n4DJuc",
+                "edit-time": 1616493554350,
+                ":edit/user": {
+                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                }
+            },
+            {
+                "string": "Overview",
+                "create-time": 1616493789179,
+                "heading": 2,
+                ":create/user": {
+                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                },
+                "children": [
+                    {
+                        "string": "I don't really understand why we need to reconnect the database, however, pending that knowledge and just considering what is causing the issue without a major refactor, here is the block in question that's giving us trouble when running tests on contests.",
+                        "create-time": 1616493792372,
+                        ":create/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        },
+                        "children": [
+                            {
+                                "string": "```php\n    public function connect($connectionName = null)\n    {\n        $result = parent::connect($connectionName);\n\n        if ($result && $this->isConnectedToMaster() && !$this->isTestTransactionCreated) {\n            $this->assertDbIsClean();\n            $this->setNestTransactionsWithSavepoints(true);\n            $this->beginTransaction();\n            $this->isTestTransactionCreated = true;\n            $this->markDbAsDirty();\n        }\n\n        return $result;\n    }```",
+                                "create-time": 1616493888518,
+                                "uid": "NXuqDosnW",
+                                "edit-time": 1616493917996,
+                                ":create/user": {
+                                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                },
+                                ":edit/user": {
+                                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                }
+                            },
+                            {
+                                "string": "This is located in the `TestDatabaseConnection.php` file.",
+                                "create-time": 1616493920996,
+                                "uid": "HSX5snTYk",
+                                "edit-time": 1616493952613,
+                                ":create/user": {
+                                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                },
+                                ":edit/user": {
+                                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                }
+                            },
+                            {
+                                "string": "Line 5 above is the problematic conditional. In order for the tests to run properly in CI, that conditional needs to pass. However, with an unpinned doctrine dependency, it will always be false.",
+                                "create-time": 1616493944172,
+                                ":create/user": {
+                                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                },
+                                "children": [
+                                    {
+                                        "string": "> Why does this block depend on the value of $result being true, does that represent a \"new\" connection, and will it reconnect if the connectionName is null in the old pinned deps?",
+                                        "create-time": 1616494004439,
+                                        "uid": "GUthS-LWX",
+                                        "edit-time": 1616494067658,
+                                        ":create/user": {
+                                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                        },
+                                        ":edit/user": {
+                                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                        }
+                                    },
+                                    {
+                                        "string": "",
+                                        "create-time": 1616494105209,
+                                        "uid": "RvYYxVtbe",
+                                        "edit-time": 1616494105209,
+                                        ":create/user": {
+                                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                        },
+                                        ":edit/user": {
+                                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                        }
+                                    }
+                                ],
+                                "uid": "XxCE5a6sT",
+                                "edit-time": 1616494004448,
+                                ":edit/user": {
+                                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                }
+                            }
+                        ],
+                        "uid": "KLf8Kkl-d",
+                        "edit-time": 1616493888525,
+                        ":edit/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        }
+                    }
+                ],
+                "uid": "RtE7SH4qS",
+                "edit-time": 1616493791731,
+                ":edit/user": {
+                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                }
+            },
+            {
+                "string": "Unpinned dependencies",
+                "create-time": 1616493800706,
+                "heading": 2,
+                ":create/user": {
+                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                },
+                "children": [
+                    {
+                        "string": "In the unpinned dependency the `connect` method looks like this following:",
+                        "create-time": 1616493554338,
+                        ":create/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        },
+                        "children": [
+                            {
+                                "string": "```php\n    public function connect($connectionName = null)\n    {\n        ...\n\n        return $this->performConnect($connectionName);\n    }```",
+                                "create-time": 1616493580390,
+                                "uid": "XG67fop0w",
+                                "edit-time": 1616495417852,
+                                ":create/user": {
+                                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                },
+                                ":edit/user": {
+                                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                }
+                            },
+                            {
+                                "string": "This then calls `performConntect` with the connection name",
+                                "create-time": 1616493594469,
+                                ":create/user": {
+                                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                },
+                                "children": [
+                                    {
+                                        "string": "```php\n    protected function performConnect(?string $connectionName = null): bool\n    {\n        $requestedConnectionChange = ($connectionName !== null);\n        $connectionName            = $connectionName ?: 'replica';\n\n        ...\n\n        if (isset($this->connections[$connectionName])) {\n            $this->_conn = $this->connections[$connectionName];\n\n            if ($forcePrimaryAsReplica && ! $this->keepReplica) {\n                $this->connections['replica'] = $this->_conn;\n            }\n\n            return false;\n        }\n\n        ...\n\n        return true;\n    }```",
+                                        "create-time": 1616493610420,
+                                        "uid": "ngln7AM8r",
+                                        "edit-time": 1616495402280,
+                                        ":create/user": {
+                                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                        },
+                                        ":edit/user": {
+                                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                        }
+                                    },
+                                    {
+                                        "string": "The problem is line 8 in the above, this is why the conditional is never returning because it's capturing that the \"master\" or \"primary\" connection is present in the connections array and therefore is returning `false`.",
+                                        "create-time": 1616493661373,
+                                        "uid": "iTQGnJs2o",
+                                        "edit-time": 1616495419937,
+                                        ":create/user": {
+                                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                        },
+                                        ":edit/user": {
+                                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                        }
+                                    }
+                                ],
+                                "uid": "0k6IiPaV5",
+                                "edit-time": 1616493610434,
+                                ":edit/user": {
+                                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                }
+                            }
+                        ],
+                        "uid": "le5lVfkda",
+                        "edit-time": 1616493580403,
+                        ":edit/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        }
+                    }
+                ],
+                "uid": "zbtfAIwcX",
+                "edit-time": 1616493808159,
+                ":edit/user": {
+                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                }
+            },
+            {
+                "string": "Pinned or current doctrine dependencies:",
+                "create-time": 1616493726738,
+                "heading": 2,
+                ":create/user": {
+                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                },
+                "children": [
+                    {
+                        "string": "This is the `connect` method in the pinned deps",
+                        "create-time": 1616493771585,
+                        "uid": "mCCXRDC48",
+                        "edit-time": 1616495066215,
+                        ":create/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        },
+                        ":edit/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        }
+                    },
+                    {
+                        "string": "```php\n    public function connect($connectionName = null)\n    {\n        $requestedConnectionChange = ($connectionName !== null);\n        $connectionName            = $connectionName ?: 'slave';\n\n        ...\n\n        if (isset($this->connections[$connectionName]) && $this->connections[$connectionName]) {\n            $this->_conn = $this->connections[$connectionName];\n\n            if ($forceMasterAsSlave && ! $this->keepSlave) {\n                $this->connections['slave'] = $this->_conn;\n            }\n\n            return false;\n        }\n\n        ...\n\n        return true;\n    }```",
+                        "create-time": 1616495045459,
+                        "uid": "IcGo7hQE9",
+                        "edit-time": 1616495385157,
+                        ":create/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        },
+                        ":edit/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        }
+                    },
+                    {
+                        "string": "The extra AND condition on line 8 does make a significant difference as the vaule of \"master\" in this conditional can be NULL. ",
+                        "create-time": 1616495425524,
+                        "uid": "ycBS9zN5T",
+                        "edit-time": 1616495620935,
+                        ":create/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        },
+                        ":edit/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        }
+                    }
+                ],
+                "uid": "mHmh2bm_y",
+                "edit-time": 1616493826354,
+                ":edit/user": {
+                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                }
+            },
+            {
+                "string": "Some big Questions here:",
+                "create-time": 1616495654091,
+                "heading": 2,
+                ":create/user": {
+                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                },
+                "children": [
+                    {
+                        "string": "Why are we creating a new connection for each suite(?) or test transaction(?). I'm sure there is some good reason for why historically, I just don't have the context as to what that reason is. ",
+                        "create-time": 1616495660221,
+                        "uid": "9cn3_PQVa",
+                        "edit-time": 1616495706858,
+                        ":create/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        },
+                        ":edit/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        }
+                    },
+                    {
+                        "string": "Is it practical to clear the state for each test in a different, updated way?",
+                        "create-time": 1616495706849,
+                        "uid": "7e6YM2aL0",
+                        "edit-time": 1616495726646,
+                        ":create/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        },
+                        ":edit/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        }
+                    },
+                    {
+                        "string": "It feels to me that this is some major tech debt, are we paying this debt down in the symfony 4 update? Or, is this big enough that it needs it's own trello card such that it can be addressed independently?",
+                        "create-time": 1616495726639,
+                        ":create/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        },
+                        "children": [
+                            {
+                                "string": "I think the answer to this really depends on whether an updated solution is practical in terms of time and complexity.",
+                                "create-time": 1616495776127,
+                                "uid": "igyxhNkLA",
+                                "edit-time": 1616495817495,
+                                ":create/user": {
+                                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                },
+                                ":edit/user": {
+                                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                }
+                            },
+                            {
+                                "string": "",
+                                "create-time": 1616495817484,
+                                "uid": "pYmgayN_Q",
+                                "edit-time": 1616495817484,
+                                ":create/user": {
+                                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                },
+                                ":edit/user": {
+                                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                                }
+                            }
+                        ],
+                        "uid": "RBykMxcIa",
+                        "edit-time": 1616495788211,
+                        ":edit/user": {
+                            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                        }
+                    }
+                ],
+                "uid": "vZzMfxb0n",
+                "edit-time": 1616495660025,
+                ":edit/user": {
+                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                }
+            },
+            {
+                "string": "In conclusion it seems that previously the connection wasn't shared, but now, the connection is shared by doctrine. ",
+                "create-time": 1616495461890,
+                "uid": "2y3dEsBfU",
+                "edit-time": 1616495628682,
+                ":create/user": {
+                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                },
+                ":edit/user": {
+                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                }
+            },
+            {
+                "string": "What is the right thing to do here? What is practical?",
+                "create-time": 1616495555158,
+                "uid": "MroRvbNVb",
+                "edit-time": 1616495565361,
+                ":create/user": {
+                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                },
+                ":edit/user": {
+                    ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+                }
+            }
+        ],
+        "uid": "SJZgptx93",
+        "edit-time": 1616493540845,
+        ":edit/user": {
+            ":user/uid": "foiG9eb60jZkW9UQkes7Vj7ErVm2"
+        }
+    }
+]
